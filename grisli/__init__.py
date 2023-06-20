@@ -52,9 +52,17 @@ def create_app(test_config=None):
         
         def post(self):
             args = parser.parse_args()
-            L = args.get('L', default=10)
-            R = args.get('R', default=3000)
-            alphaMin = args.get('alphaMin', default=0.0)
+            L = args.get('L')
+            R = args.get('R')
+            alphaMin = args.get('alphaMin')
+            # Assign Default values if not passed.
+            if not L:
+                L = 10
+            if not R:
+                R = 3000
+            if not alphaMin:
+                alphaMin = 0.0
+            # Create task
             task = create_grisli_task.delay(args["zenodo_id"], L, R, alphaMin)
             return {"task_id": task.id}, 200
 

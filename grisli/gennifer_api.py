@@ -55,18 +55,18 @@ def run(tempUniqueDirPath, PTData, L, R, alphaMin):
     colNames = PTData.columns
     for idx in range(len(colNames)):
         #inputPath = "data"+str(RunnerObj.inputDir).split(str(Path.cwd()))[1]+"/GRISLI/"+str(idx)+"/"
-        inputPath = os.path.join(tempUniqueDirPath, "GRISLI", str(idx)))
-        os.makedirs(os.path.join(outDir, str(idx)) exist_ok = True)
+        inputPath = os.path.join(tempUniqueDirPath, "GRISLI", str(idx)) + "/"
+        os.makedirs(os.path.join(outDir, str(idx)), exist_ok = True)
 
         outFile = os.path.join(outDir, str(idx), "outFile.txt")
 
-        cmdToRun = ' '.join(['./GRISLI', inputPath, outFile, L, R, alphaMin])
+        cmdToRun = ' '.join(['./GRISLI', inputPath, outFile, str(L), str(R), str(alphaMin)])
 
         os.system(cmdToRun)
     return outDir
 
 
-def parseOutput(outDir, PTData, ExpressionData):
+def parseOutput(tempUniqueDirPath, outDir, PTData, ExpressionData):
     '''
     Function to parse outputs from GRISLI.
     '''
@@ -80,7 +80,7 @@ def parseOutput(outDir, PTData, ExpressionData):
 
     for indx in range(len(colNames)):
         # Read output
-        outFile = os.path.join(outDir, str(indx), '/outFile.txt')
+        outFile = os.path.join(outDir, str(indx), 'outFile.txt')
         OutDF = pd.read_csv(outFile, sep = ',', header = None)    
         # Sort values in a matrix using code from:
         # https://stackoverflow.com/questions/21922806/sort-values-of-matrix-in-python
@@ -98,12 +98,12 @@ def parseOutput(outDir, PTData, ExpressionData):
         
         # megre the dataframe by taking the maximum value from each DF
         # From here: https://stackoverflow.com/questions/20383647/pandas-selecting-by-label-sometimes-return-series-sometimes-returns-dataframe
-    outDF = pd.DataFrame.from_records(results)
+    outDF = pd.DataFrame.from_dict(results)
 
     res = outDF.groupby(['Gene1','Gene2'],as_index=False).max()
     # Sort values in the dataframe   
     finalDF = res.sort_values('EdgeWeight',ascending=False)  
-    results = finalDF.to_records(index=False)
+    results = finalDF.to_dict('list')
     
     shutil.rmtree(tempUniqueDirPath)
     

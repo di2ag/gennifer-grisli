@@ -14,5 +14,5 @@ celery.conf.task_routes = {"create_grisli_task": {"queue": 'grisli'}}
 def create_grisli_task(zenodo_id, L, R, alphaMin):
     tempDir, PTData, ExpressionData = generateInputs(zenodo_id)
     outDir = run(tempDir, PTData, L, R, alphaMin)
-    output = parseOutput(outDir, PTData, ExpressionData)
+    output = parseOutput(tempDir, outDir, PTData, ExpressionData)
     return output
