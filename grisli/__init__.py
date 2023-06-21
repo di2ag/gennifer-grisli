@@ -81,8 +81,8 @@ def create_app(test_config=None):
             # Specify algorithm info here.
             info = {
                     "name": 'grisli',
-                    "description": 'PIDC is available in a Julia package titled “NetworkInference”. This package has options to compute various network inference algorithms such has Mutual Information, CLR, PUC and PIDC. We used the maximum likelihood estimator, as recommended by the authors. We did not use any edge-weight cut-off. We converted the resulting undircted network in the form of an adjacency matrix into to a ranked edge list.',
-                    "edge_weight_type": 'maximum_liklihood_estimator',
+                    "description": 'GRISLI is available as a MATLAB package. GRISLI has options for parameters such as R, L and α, for which we performed parameter estimation using values recommended by the authors. GRISLI outputs a list of ranks for each edge as an adjacency matrix, which we then converted to a ranked edge list.',
+                    "edge_weight_type": '',
                     "edge_weight_description": "",
                     }
             return info, 200
