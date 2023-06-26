@@ -82,8 +82,9 @@ def create_app(test_config=None):
             info = {
                     "name": 'grisli',
                     "description": 'GRISLI is available as a MATLAB package. GRISLI has options for parameters such as R, L and α, for which we performed parameter estimation using values recommended by the authors. GRISLI outputs a list of ranks for each edge as an adjacency matrix, which we then converted to a ranked edge list.',
-                    "edge_weight_type": '',
-                    "edge_weight_description": "",
+                    "edge_weight_type": 'Ranked list',
+                    "edge_weight_description": "A ranked list of all edges found by the algorithm.",
+                    "directed": False,
                     }
             return info, 200
 
