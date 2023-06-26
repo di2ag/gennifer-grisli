@@ -39,6 +39,7 @@ RUN mkdir runGRISLI
 COPY runGRISLI/ /app
 
 ENV LD_LIBRARY_PATH /opt/mcr/v96/runtime/glnxa64:/opt/mcr/v96/bin/glnxa64
+RUN mv /opt/mcr/v96/bin/glnxa64/libexpat.so.1 /opt/mcr/v96/bin/glnxa64/libexpat.so.1.NOFIND
 
 RUN mkdir -p /root/.mcrCache9.6/GRISLI0/GRISLI/
 
