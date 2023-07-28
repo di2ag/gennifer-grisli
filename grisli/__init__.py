@@ -85,6 +85,23 @@ def create_app(test_config=None):
                     "edge_weight_type": 'Ranked list',
                     "edge_weight_description": "A ranked list of all edges found by the algorithm.",
                     "directed": False,
+                    "hyperparameters": {
+                        "L": {
+                            "type": "INT",
+                            "default": 10,
+                            "info": None,
+                            },
+                        "R": {
+                            "type": "INT",
+                            "default": 3000,
+                            "info": None,
+                            },
+                        "alphaMin": {
+                            "type": "FLOAT",
+                            "default": 0.0,
+                            "info": None,
+                            }
+                        }
                     }
             return info, 200
 
